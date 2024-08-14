@@ -12,16 +12,18 @@ export const addToCart = ({
   title,
   id,
   price,
+  image
 }: {
   title: string;
   id: number;
   price: number;
+  image: string;
 }) => {
   const itemInCart = cartArray.find((cartItem) => cartItem.id === id);
   if (itemInCart) {
     itemInCart.quantity += 1;
   } else {
-    cartArray.push({ title, id, price, quantity: 1 });
+    cartArray.push({ title, id, price, image, quantity: 1 });
   }
 
   localStorage.setItem("cart", JSON.stringify(cartArray));

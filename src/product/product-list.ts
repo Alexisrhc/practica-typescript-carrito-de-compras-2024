@@ -35,9 +35,9 @@ const createProductCard = (
   const clone = $productTemplate.content.cloneNode(true) as HTMLDivElement;
   clone.querySelector("img")!.src = image;
   clone.querySelector("h2")!.textContent = title;
-  clone.querySelector("p span")!.textContent = `$${price}`;
+  clone.querySelector("span")!.textContent = `$${price}`;
   clone.querySelector("button")!.addEventListener("click", () => {
-    addToCart({ title, price, id });
+    addToCart({ title, price, id, image });
   });
 
   return clone;

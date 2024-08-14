@@ -17,9 +17,9 @@ export const renderCartList = async () => {
   });
 
   if (cartArray.length === 0) {
-    $cartTotal.innerHTML = "<p>Cart is empty</p>";
+    $cartTotal.innerHTML = '<div class="min-h-[85vh] grid place-content-center">carro vacio, agrega un producto</div>';
   } else {
-    $cartTotal.textContent = `Total: $${getTotal().toFixed(2)}`;
+    $cartTotal.textContent = `Total a pagar: $${getTotal().toFixed(2)}`;
   }
 };
 
@@ -27,10 +27,10 @@ const createCartItem = (
   cartItem: CartItem,
   $cartTemplate: HTMLTemplateElement
 ) => {
-  const { title, price, quantity, id } = cartItem;
+  const { title, price, quantity, id, image } = cartItem;
 
   const clone = $cartTemplate.content.cloneNode(true) as HTMLLIElement;
-
+  clone.querySelector("img")!.src = image;
   clone.querySelector("[data-cart='title']")!.textContent = title;
   clone.querySelector("[data-cart='price']")!.textContent = `$${(
     price * quantity
@@ -41,7 +41,7 @@ const createCartItem = (
   clone
     .querySelector("[data-cart='increment']")!
     .addEventListener("click", () => {
-      addToCart({ title, price, id });
+      addToCart({ title, price, id, image });
     });
 
   clone
